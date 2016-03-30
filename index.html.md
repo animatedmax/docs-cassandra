@@ -55,64 +55,6 @@ For more information, refer to the full [Product Version Matrix](../compatibilit
 </tr>
 </table>
 
-## Install via Pivotal Operations Manager
-
-To install DataStax Enterprise for PCF, follow the procedure for installing Pivotal Ops Manager tiles:
-
-1. Download the product file from [Pivotal Network](https://network.pivotal.io/).
-1. Upload the product file to your Ops Manager installation.
-1. Click **Add** next to the uploaded product description in the Available Products view to add this product to your staging area.
-1. Click the newly added tile to review any configurable options.
-1. Click **Apply Changes** to install the service.
-
-## Available Plans
-
-There is one available plan:
-
-<table border="1" class="nice">
-<tr>
-<th><strong>Plan Name</strong></th>
-<th><strong>Suitable for</strong></th>
-<th><strong>Tenancy Model per Instance</strong></th>
-<th><strong>Highly Available</strong></th>
-<th><strong>Availability Zone support</strong></th>
-<th><strong>Rolling Deployments</strong></th>
-<th><strong>Operational Monitoring & Logging</strong></th>
-<th><strong>Backup Functionality</strong></th>
-</tr>
-
-<tr>
-<td><b>multi-tenant</b></td>
-<td>Workloads that do not require dedicated resources</td>
-<td>Shared Cluster</td>
-<td>Yes</td>
-<td>
-  <ul>
-    <li>vSphere - Yes, we recommend 2 AZs</li>
-    <li>AWS - No, PCF Ops Manager 1.6 does not support multiple AZ for AWS</li>
-  </ul>
-</td>
-<td>Yes</td>
-<td>Syslog for all components</td>
-<td>Can be enabled by the Operator in DataStax OpsCenter</td>
-</tr>
-
-</table>
-
-## Provisioning and Binding via Cloud Foundry
-
-Once you have installed the product, it automatically registers itself with your Elastic Runtime. At this point, the product is available to your application developers, either in the Marketplace in the web based console, or via `cf marketplace`. They can add, provision, and bind the service to their applications like any other CF service:
-
-```
-$ cf create-service p-cassandra multi-tenant datastax
-$ cf bind-service my-application datastax
-$ cf restart my-application
-```
-
-## Example Application
-
-To help your application developers get started with DataStax Enterprise for PCF, we have provided an example application, which can be [downloaded here](https://github.com/pivotal-cf/cf-cassandra-example-app/archive/master.zip).
-
 ## Drivers
 DataStax recommends that you use one of their [certified drivers](http://www.datastax.com/download#dl-datastax-drivers) in your application to connect to your instance.
 

@@ -1,8 +1,8 @@
 ---
 title: DataStax Enterprise for Pivotal Cloud Foundry&reg;
 ---
-
-# Upgrades
+<div id="upgrades"></div>
+## Upgrades
 
 This product enables a seamless upgrade experience between versions of the product that is deployed through Ops Manager.
 
@@ -22,21 +22,22 @@ Ops Manager ensures the instances are updated with the new packages and any conf
 
 Upgrading to a newer version of the product does not cause any loss of data or configuration. This is explicitly tested for during our build and test process for a new release of the product.
 
-## Steps executed during an upgrade of the cluster
+### What happens during an upgrade?
 
-1. Disable the repair service across the cluster
+1. The repair service is disabled across the cluster
 1. On each node:
-  1. Prepare for safe shutdown via `nodetool disablegossip`, `nodetool disablethrift` and `nodetool drain`
-  1. Stop the node
-  1. Backup configuration files
-  1. Update configuration files for the new version of DataStax
-  1. Update the DataStax packages
-  1. Start the Cassandra process and wait for it to be healthy
-  1. Take a snapshot of the data (if there is enough free space to store the snapshot on disk)
-  1. Upgrade the SSTables
-  1. Start the node
-1. Enable the repair service across the cluster
+  * Safe shutdown is initiated via `nodetool disablegossip`, `nodetool disablethrift` and `nodetool drain`
+  * The node is stopped
+  * Configuration files are backed up
+  * Configuration files are updated for the new version of DataStax
+  * The DataStax packages are updated
+  * The Cassandra process is restarted and is determined to be healthy
+  * A snapshot of the data is taken (if there is enough free space to store the snapshot on disk)
+  * The SSTables are upgraded
+  * The node is started
+1. The repair service is reenabled across the cluster
 
+<div id="deployments"></div>
 ## Rolling deployments
 
 The deployment and upgrade process is designed to only update a single node in the cluster at a time. That node will be fully updated and brought back on-line before BOSH moves onto the next node in the cluster.
@@ -45,7 +46,8 @@ We recommend that all applications should use one of the [DataStax Certified Dri
 
 Combining updating a single node at a time and using a certified driver, along with a well behaved client application it is possible to conduct a rolling deployment and experience minimal if no downtime to your application.
 
-### Known issues
+<div id="issues"></div>
+## Known issues
 
 On AWS we have observed stale ARP entries remaining in some of the nodes' ARP caches after a node has been updated. This prevents the nodes from being able to communicate with the upgraded node. The Cassandra process will start and the node will appear healthy, but it will not have rejoined the cluster successfully.
 
