@@ -13,6 +13,12 @@ To install DataStax Enterprise for PCF, follow the procedure for installing Pivo
 1. Click the newly added tile to review any configurable options.
 1. Click **Apply Changes** to install the service.
 
+<div id="making_changes"></div>
+## Making changes to an existing installation
+
+Your installed Cassandra cluster is availability zone aware. If you make changes to your installation's availability zones, please be
+aware that you will need to manually run a [sequential repair](http://docs.datastax.com/en/cassandra/2.1/cassandra/operations/opsRepairNodesManualRepair.html) and [cleanup process](http://docs.datastax.com/en/cassandra/2.1/cassandra/tools/toolsCleanup.html) on each node before your cluster is ready for use. For more information please see the Datastax documentation on [topology changes](http://docs.datastax.com/en/cassandra/2.1/cassandra/operations/opsMoveNodeRack.html).
+
 <div id="example"></div>
 ## Example Application
 
