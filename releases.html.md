@@ -17,6 +17,7 @@ Features included in this release:
 * Suitable for workloads that do not require dedicated resources.
 * DataStax OpsCenter is now located on its own VM
 * Smoke tests are run after a deployment to perform basic functionality and ensure the cluster is working and in a healthy state.
+* Cassandra cluster is multi AZ aware
 
 **Known issue:**
 

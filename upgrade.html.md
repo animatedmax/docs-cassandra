@@ -62,6 +62,11 @@ Therefore during an upgrade of a 5 node cluster the following scenario will occu
 * Node 2 is taken offline to be updated
 * Nodes 3,4,5 are still online and operational - maintaining quorum for reads / writes
 
+<div id="az_awareness"></div>
+## Upgraded Cassandra is NOT AZ aware
+
+Your upgraded Cassandra cluster is NOT availability zone aware. If you wish to utilise the multi AZ functionality, you will need to deploy a fresh cluster. 
+
 ## Release policy
 
 When a new version of DataStax Enterprise is released we aim to release a new version of the product containing this soon after.
