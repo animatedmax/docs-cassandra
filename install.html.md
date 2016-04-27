@@ -13,6 +13,22 @@ To install DataStax Enterprise for PCF, follow the procedure for installing Pivo
 1. Click the newly added tile to review any configurable options.
 1. Click **Apply Changes** to install the service.
 
+<div id="making_changes"></div>
+## Making changes to an existing installation
+
+Your installed Cassandra cluster is availability zone aware. If you make changes to your installation's availability zones, please be
+aware that you will need to manually run a [sequential repair](http://docs.datastax.com/en/cassandra/2.1/cassandra/operations/opsRepairNodesManualRepair.html) and [cleanup process](http://docs.datastax.com/en/cassandra/2.1/cassandra/tools/toolsCleanup.html) on each node before your cluster is ready for use. For more information please see the Datastax documentation on [topology changes](http://docs.datastax.com/en/cassandra/2.1/cassandra/operations/opsMoveNodeRack.html).
+
+<div id="data_center_name"></div>
+## Data Center Name
+
+Once the data center name has been set for a deployment, it must not be changed. Any attempt to change the data center name of
+an existing deployment will result in a deployment failure, since the deployment will prevent the change from being applied in
+order to protect your data. 
+
+Should you accidentally change the name and encounter this scenario, you can recover your deployment simply by resetting the
+data center name back to its original value, and clicking 'Apply changes'.
+
 <div id="example"></div>
 ## Example Application
 
