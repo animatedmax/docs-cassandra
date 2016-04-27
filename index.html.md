@@ -43,7 +43,7 @@ For more information, refer to the full [Product Version Matrix](../compatibilit
 <tr>
   <th>1.6.x, 1.5.x and 1.4.x</th>
   <td><ul>
-      <li>From 1.3.2 to 1.3.5, 1.3.6, 1.3.7, 1.3.8, 1.4.0</li>    
+      <li>From 1.3.2 to 1.3.5, 1.3.6, 1.3.7, 1.3.8, 1.4.0</li>
       <li>From 1.3.3 to 1.3.5, 1.3.6, 1.3.7, 1.3.8, 1.4.0</li>
       <li>From 1.3.4 to 1.3.5, 1.3.6, 1.3.7, 1.3.8, 1.4.0</li>
       <li>From 1.3.5 to 1.3.6, 1.3.7, 1.3.8, 1.4.0</li>
