@@ -112,9 +112,7 @@ These are the default resource and IP requirements for installing the tile
 
 Limitations with the current Cassandra product include:
 
-* Users are able to see the names of all other keyspaces in the cluster (though these names are essentially random). This is a limitation in Cassandra, and cannot be addressed without their assistance.
-* **Users are able to see the names of all tables inside another user's keyspace.**  They cannot see the data inside though. This is a limitation in Cassandra, and cannot be addressed without their assistance.
-* Users cannot provision multiple keyspaces in a single service instance,
-  though they can easily provision multiple instances, each with their own
-  keyspace.
+* Users are able to list all keyspaces in the cluster, including keyspaces that belong to other users. Keyspaces have random names. This is a Cassandra limitation.
+* Users are able to list all tables in all keyspaces, including keyspaces that belong to other users. Users cannot access data in tables outside of their keyspace. This is a Cassandra limitation.
+* Users cannot provision multiple keyspaces in a single service instance. They can provision multiple instances, each with their own keyspace.
 * Constraining CPU, memory and/or disk usage is not supported.

@@ -38,7 +38,7 @@ Upgrading to a newer version of the product does not cause any loss of data or c
 1. The repair service is reenabled across the cluster
 
 <div id="deployments"></div>
-## Rolling deployments
+## Rolling Deployments
 
 The deployment and upgrade process is designed to only update a single node in the cluster at a time. That node will be fully updated and brought back on-line before BOSH moves onto the next node in the cluster.
 
@@ -46,28 +46,8 @@ We recommend that all applications should use one of the [DataStax Certified Dri
 
 Combining updating a single node at a time and using a certified driver, along with a well behaved client application it is possible to conduct a rolling deployment and experience minimal if no downtime to your application.
 
-<div id="issues"></div>
-## Known issues
-
-On AWS we have observed stale ARP entries remaining in some of the nodes' ARP caches after a node has been updated. This prevents the nodes from being able to communicate with the upgraded node. The Cassandra process will start and the node will appear healthy, but it will not have rejoined the cluster successfully.
-
-We have implemented workarounds to resolve the issue and to also force the local ARP cache to be updated, but we have still witnessed this taking a few minutes to resolve itself.
-
-This can in some cases cause your cluster to lose quorum if you deploy the with default 4 node configuration.
-
-We recommend that you scale your `multi-tenant` cluster to 5 nodes, by increasing the count of the `Multitenant Cassandra Node` to `2` nodes from the default of `1`.
-
-Therefore during an upgrade of a 5 node cluster the following scenario will occur
-* Node 1 is updated and brought online - but hasn't yet rejoined the cluster
-* Node 2 is taken offline to be updated
-* Nodes 3,4,5 are still online and operational - maintaining quorum for reads / writes
-
-<div id="az_awareness"></div>
-## Upgraded Cassandra is NOT AZ aware
-
-Your upgraded Cassandra cluster is NOT availability zone aware. If you wish to utilise the multi AZ functionality, you will need to deploy a fresh cluster. 
-
-## Release policy
+<div id="policy"></div>
+## Release Policy
 
 When a new version of DataStax Enterprise is released we aim to release a new version of the product containing this soon after.
 

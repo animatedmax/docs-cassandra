@@ -5,27 +5,41 @@ title: DataStax Enterprise for Pivotal Cloud Foundry&reg;
 Release notes for [DataStax Enterprise for Pivotal Cloud Foundry&reg;](https://network.pivotal.io/products/p-cassandra)
 
 ### 1.4.0
-**Release Date: xx February 2016**
 
-Features included in this release:
+**Release Date: xx May 2016**
+
+**Stale entries in Address Resolution Protocol (ARP)**
+
+On AWS we have observed stale ARP entries remaining in some of the nodes' ARP caches after a node has been updated. This prevents the nodes from being able to communicate with the upgraded node. The Cassandra process will start and the node will appear healthy, but it will not have rejoined the cluster successfully.
+
+We have implemented workarounds to resolve the issue and to also force the local ARP cache to be updated, but we have still witnessed this taking a few minutes to resolve itself.
+
+There is a risk that with the default 4 node cluster setup, you can lose quorum in the cluster which, depending on the chosen settings in your application, could result in you not being able to read / write data.
+
+To alleviate this, we recommend scaling the cluster to 5 nodes before upgrading to this `1.4.0` tile. This can be achieved by increasing the number of `Multitenant Cassandra Node` to 2 nodes and deploying successfully. This reduces the probability of the cluster losing quorum, but does not eliminate it. However, we have observed the cluster resolve itself in a few minutes.
+
+During an upgrade of a 5 node cluster the following scenario will occur
+* Node 1 is updated and brought online - but hasn't yet rejoined the cluster
+* Node 2 is taken offline to be updated
+* Nodes 3,4,5 are still online and operational - maintaining quorum for reads / writes
+
+Before then upgrading to this `1.4.0` tile, we recommend you log into DataStax OpsCenter and validate that all 5 nodes are online and healthy and are now fully replicated.
+
+**Availability zone awareness**
+
+To benefit from availability zone awareness in your DataStax Enterprise cluster, you will need to delete your existing DataStax Enteprise product and install `1.4.0` as a new product. Upgrading from a previous DataStax Enterprise version will not enable this feature.
+
+**New features**
 
 * Updated stemcell to xxxx
-* DataStax Enterprise is automatically upgraded when moving to this tile version. Including executing all of the recommend upgrade steps **Please refer to the [upgrade documentation](upgrade.html) for more details before executing this upgrade**
-* Support for rolling deployments
 * DataStax Enterprise updated to 4.8.2
 * DataStax OpsCenter updated to 5.2.2
-* Suitable for workloads that do not require dedicated resources.
 * DataStax OpsCenter is now located on its own VM
-* Smoke tests are run after a deployment to perform basic functionality and ensure the cluster is working and in a healthy state.
-* Cassandra cluster is multi AZ aware
-
-**Known issue:**
-
-* On AWS we have observed stale ARP entries remaining in some of the nodes' ARP caches after a node has been updated. This prevents the nodes from being able to communicate with the upgraded node. The Cassandra process will start and the node will appear healthy, but it will not have rejoined the cluster successfully.
-* We have implemented workarounds, but we have observed this taking a few minutes to resolve itself.
-* There is a risk that with the default 4 node cluster setup, you can lose quorum in the cluster which, depending on the chosen settings in your application, could result in you not being able to read / write data.
-* To alleviate this, we recommend scaling the cluster to 5 nodes before upgrading to this `1.4.0` tile. This can be achieved by increasing the number of `Multitenant Cassandra Node` to 2 nodes and deploying successfully. This reduces the probability of the cluster losing quorum, but does not eliminate it. However, we have observed the cluster resolve itself in a few minutes.
-* Before then upgrading to this `1.4.0` tile, we recommend you log into DataStax OpsCenter and validate that all 5 nodes are online and healthy and are now fully replicated.
+* DataStax Enterprise is automatically upgraded when moving to this tile version. Including executing all of the recommend upgrade steps **Please refer to the [upgrade documentation](upgrade.html) for more details before executing this upgrade**
+* DataStax Enterprise is availability zone aware when installed as a new product
+* Support for rolling upgrades
+* Suitable for workloads that do not require dedicated resources
+* Smoke tests are run after a deployment to perform basic functionality and ensure the cluster is in a healthy state
 
 ### 1.3.8
 **Release Date: 11th November 2015**
